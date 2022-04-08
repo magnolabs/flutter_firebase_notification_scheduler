@@ -39,8 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final FirebaseNotificationScheduler firebaseNotificationScheduler =
       FirebaseNotificationScheduler(
           authenticationKey:
-              'NzAwMmNmMWMtMGJkMC00MGE1LTg2YWUtMjFiYjUyMjdmNTE4OmtpMXdyRzd6aTljbUh2QW5ZVS5xOXZDeURIbXFaZS4=',
-          rapidApiKey: "adbb50b06cmshd69ecaa51a30199p1a654djsnff5f676a2a5f");
+              ,
+          rapidApiKey: );
 
   late Future<List<ScheduledNotification>> getScheduledNotificationFuture;
 
