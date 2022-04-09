@@ -25,8 +25,8 @@ class FirebaseNotificationScheduler {
   final String _endPoint =
       'https://firebase-notification-scheduler.p.rapidapi.com';
 
-  Future<String> scheduleNotification(
-      String payload, DateTime dateTimeInUtc) async {
+  Future<String> scheduleNotification({
+      required String payload,required DateTime dateTimeInUtc}) async {
     final String _path = '$_endPoint/messages';
 
     final Map _formData = {
@@ -46,9 +46,8 @@ class FirebaseNotificationScheduler {
     return _json['scheduledMessageId'];
   }
 
-  Future cancelNotification(String messageId) async {
+  Future cancelNotification({required String messageId}) async {
     final String _path = '$_endPoint/messages/$messageId/abort';
-    print(_path);
     final _response = await client.put(Uri.parse(_path), headers: header);
     if (_response.statusCode != 200) {
       throw Exception(

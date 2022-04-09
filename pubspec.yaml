@@ -1,6 +1,6 @@
 name: firebase_notification_scheduler
 description: Package to schedule firebase notifications in cloud
-version: 0.0.1
+version: 0.0.2
 repository: https://github.com/magnolabs/flutter_firebase_notification_scheduler
 
 environment:

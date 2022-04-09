@@ -37,10 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   ///AUTHENTICATION KEY: visit https://fns-registration.magnolabs.in after getting rapid API KEY.
 
   final FirebaseNotificationScheduler firebaseNotificationScheduler =
-      FirebaseNotificationScheduler(
-          authenticationKey:
-              ,
-          rapidApiKey: );
+      FirebaseNotificationScheduler(authenticationKey: '', rapidApiKey: '');
 
   late Future<List<ScheduledNotification>> getScheduledNotificationFuture;
 
@@ -70,11 +67,11 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Row(
               children: [
-                Expanded(child: scheduleNotificationWidget()),
+                Expanded(child: _scheduleNotificationWidget()),
                 const SizedBox(
                   width: 10,
                 ),
-                Expanded(child: getScheduledNotificationsButton()),
+                Expanded(child: _getScheduledNotificationsButton()),
               ],
             ),
             const Divider(),
@@ -82,23 +79,30 @@ class _MyHomePageState extends State<MyHomePage> {
               'Your Scheduled notifications',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            scheduledNotificationList()
+            _scheduledNotificationList()
           ],
         ),
       ),
     );
   }
 
-  Widget scheduleNotificationWidget() {
-    String payload = createFcmPayload();
-    DateTime now = DateTime.now().toUtc();
-    DateTime dateTimeInUtc = now.add(const Duration(minutes: 1));
+  Widget _scheduleNotificationWidget() {
+    final String _payload = {
+      "to": "/topics/any",
+      "notification": {
+        "title": "Title of Your Notification",
+        "body": "Body of Your Notification"
+      },
+      "data": {"key_1": "Value for key_1", "key_2": "Value for key_2"}
+    }.toString();
+    final DateTime _now = DateTime.now().toUtc();
+    final DateTime _dateTimeInUtc = _now.add(const Duration(minutes: 1));
 
     return ElevatedButton.icon(
         onPressed: () async {
           debugPrint('scheduling a new notification');
           await firebaseNotificationScheduler.scheduleNotification(
-              payload, dateTimeInUtc);
+              payload: _payload, dateTimeInUtc: _dateTimeInUtc);
           getScheduledNotificationFuture =
               firebaseNotificationScheduler.getAllScheduledNotification();
           setState(() {});
@@ -107,21 +111,8 @@ class _MyHomePageState extends State<MyHomePage> {
         label: const Text('Schedule for next minute'));
   }
 
-  String createFcmPayload() {
-    //todo: remove sensitive token
-    Map m = {
-      "to":
-          "",
-      "notification": {
-        "title": "Title of Your Notification",
-        "body": "Body of Your Notification"
-      },
-      "data": {"key_1": "Value for key_1", "key_2": "Value for key_2"}
-    };
-    return m.toString();
-  }
 
-  Widget scheduledNotificationList() {
+  Widget _scheduledNotificationList() {
     return FutureBuilder(
         future: getScheduledNotificationFuture,
         builder: (context, snapshot) {
@@ -153,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: const Text('Cancel'),
                             onPressed: () async {
                               await firebaseNotificationScheduler
-                                  .cancelNotification(item.messageId);
+                                  .cancelNotification(messageId: item.messageId);
                               firebaseNotificationScheduler
                                   .getAllScheduledNotification();
                               setState(() {});
@@ -174,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  Widget getScheduledNotificationsButton() {
+  Widget _getScheduledNotificationsButton() {
     return ElevatedButton.icon(
       onPressed: () {
         getScheduledNotificationFuture =

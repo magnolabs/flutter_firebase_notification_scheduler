@@ -53,9 +53,9 @@ packages:
   firebase_notification_scheduler:
     dependency: "direct main"
     description:
-      name: firebase_notification_scheduler
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "/Users/abdullarashidm/dev/firebase_notification_scheduler"
+      relative: false
+    source: path
     version: "0.0.1"
   flutter:
     dependency: "direct main"
