@@ -1,39 +1,51 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Flutter Firebase Notification Scheduler
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+A simple plugin to schedule your firebase notification with help of this [Rapid api](https://rapidapi.com/magno-labs-magno-labs-default/api/firebase-notification-scheduler)
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+## Installation
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Add *firebase_notification_scheduler* as a dependency in [your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
+```
+firebase_notification_scheduler : any
 ```
 
-## Additional information
+## How to
+#### Creating API Key's
+ 1.  Signup for the Firebase Notification Scheduler Rapid API and get API Key [from here](https://rapidapi.com/magno-labs-magno-labs-default/api/firebase-notification-scheduler).
+ 2.  Create your authentication key [from here](http://fns-registration.magnolabs.in)
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+#### Initialising Package
+```
+final FirebaseNotificationScheduler firebaseNotificationScheduler =  
+    FirebaseNotificationScheduler(  
+        authenticationKey: <YOUR-RAPID-API-KEY> ,
+        rapidApiKey:  <YOUR-AUTHENTICATION-KEY>
+        );
+  ```
+
+#### Scheduling a notification
+```
+//Schedules a notification to the next minute
+firebaseNotificationScheduler.scheduleNotification(  
+    {  
+      "to":  
+          "fYZpGcSSSSKHRbXpqzMXDU:APA91bFrdQmaBe0MikHf-k3821Fq0jQ0U-sDXpbgXcjfdNpg9AMaZLQPos6-j2Ru9tc4bvLXmngxeXvZoINpzkLtVoLXLsJcZlcIlc7O_MCHkU_UOX2lkllTxOiAF2mZyBETA7vgaNl-",  
+  "notification": {  
+        "title": "Title of Your Notification",  
+  "body": "Body of Your Notification"  
+  },  
+  "data": {"key_1": "Value for key_1", "key_2": "Value for key_2"}  
+    }.toString(),  
+  DateTime.now().add(const Duration(minutes: 1)).toUtc());
+```
+
+#### Getting all Scheduled notifications
+```
+List<ScheduledNotification> list=await firebaseNotificationScheduler.getAllScheduledNotification();
+```
+
+#### Cancelling a notification
+```
+firebaseNotificationScheduler.cancelNotification('k3821Fq0jQ0U-sDXp');
+```
