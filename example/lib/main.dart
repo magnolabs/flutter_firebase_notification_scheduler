@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //todo: remove sensitive token
     Map m = {
       "to":
-          "fYZpGcSSSSKHRbXpqzMXDU:APA91bFrdQmaBe0MikHf-k3821Fq0jQ0U-sDXpbgXcjfdNpg9AMaZLQPos6-j2Ru9tc4bvLXmngxeXvZoINpzkLtVoLXLsJcZlcIlc7O_MCHkU_UOX2lkllTxOiAF2mZyBETA7vgaNl-",
+          "",
       "notification": {
         "title": "Title of Your Notification",
         "body": "Body of Your Notification"

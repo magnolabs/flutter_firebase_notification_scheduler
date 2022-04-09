@@ -43,13 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
-  cupertino_icons:
-    dependency: "direct main"
-    description:
-      name: cupertino_icons
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.4"
   fake_async:
     dependency: transitive
     description:
@@ -60,9 +53,9 @@ packages:
   firebase_notification_scheduler:
     dependency: "direct main"
     description:
-      path: "/Users/abdullarashidm/dev/firebase_notification_scheduler"
-      relative: false
-    source: path
+      name: firebase_notification_scheduler
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.1"
   flutter:
     dependency: "direct main"
